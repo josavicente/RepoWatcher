@@ -27,10 +27,22 @@ class NetworkManager {
             throw NetworkError.invalidResponse
         }
         do {
-            return try decoder.decode(Repository.self, from: data)
+            let codingData = try decoder.decode(Repository.codingData.self, from: data)
+            return codingData.repo
         } catch {
             throw NetworkError.inavalidRepoData
         }
+    }
+    
+    func downloadImageData(from urlString: String) async -> Data? {
+        guard let url = URL(string: urlString) else {return nil}
+        do {
+            let (data, _) = try await URLSession.shared.data(from: url)
+            return data
+        }catch{
+            return nil
+        }
+        
     }
 }
 
@@ -43,5 +55,5 @@ enum NetworkError: Error {
 
 enum RepoURL{
     static let repoMidu = "https://api.github.com/repos/midudev/aprendiendo-react"
-    static let repoJosa = "https://api.github.com/repos/josavicente/josavicente-dev "
+    static let repoJosa = "https://api.github.com/repos/josavicente/josavicente-dev"
 }
