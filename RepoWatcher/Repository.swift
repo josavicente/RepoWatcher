@@ -16,6 +16,7 @@ struct Repository {
     let openIssues: Int
     let pushedAt: String
     var avatarData: Data
+    var contributors: [Contributor] = []
 
 }
 

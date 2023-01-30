@@ -20,7 +20,7 @@ struct CompactRepoProvider: TimelineProvider {
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         Task{
-            var entries: [CompactRepoEntry] = []
+            //var entries: [CompactRepoEntry] = []
             let nextUpdate = Date().addingTimeInterval(43200) // 12 hours in seconds
 
             do{

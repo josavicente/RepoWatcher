@@ -44,6 +44,27 @@ class NetworkManager {
         }
         
     }
+    
+    func getContributors(atURL urlString: String) async throws -> [Contributor] {
+        guard let url = URL(string: urlString) else {
+            throw NetworkError.invalidRepoURL
+        }
+        
+        let (data, response) = try await URLSession.shared.data(from: url)
+        
+        guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+            throw NetworkError.invalidResponse
+        }
+        do {
+            let codingData = try decoder.decode([Contributor.codingData].self, from: data)
+            let contributors =  codingData.map { $0.contributor }
+            return contributors
+        } catch {
+            throw NetworkError.inavalidRepoData
+        }
+    }
+    
+    
 }
 
 
