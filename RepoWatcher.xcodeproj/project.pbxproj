@@ -29,6 +29,7 @@
 		807E177629887FA0006D4DD9 /* ContributorMediumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807E177529887FA0006D4DD9 /* ContributorMediumView.swift */; };
 		807E1778298880B5006D4DD9 /* Contributor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807E1777298880B5006D4DD9 /* Contributor.swift */; };
 		807E1779298880B5006D4DD9 /* Contributor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807E1777298880B5006D4DD9 /* Contributor.swift */; };
+		80DD7543298AFE9B0001C6A2 /* UserDefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DD7542298AFE9B0001C6A2 /* UserDefaultsExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,9 @@
 		807E1773298860F6006D4DD9 /* ContributorWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributorWidget.swift; sourceTree = "<group>"; };
 		807E177529887FA0006D4DD9 /* ContributorMediumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributorMediumView.swift; sourceTree = "<group>"; };
 		807E1777298880B5006D4DD9 /* Contributor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contributor.swift; sourceTree = "<group>"; };
+		80DD7540298AFE3E0001C6A2 /* RepoWatcher.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RepoWatcher.entitlements; sourceTree = "<group>"; };
+		80DD7541298AFE5E0001C6A2 /* RepoWatcherWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RepoWatcherWidgetExtension.entitlements; sourceTree = "<group>"; };
+		80DD7542298AFE9B0001C6A2 /* UserDefaultsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +104,7 @@
 		8053A288298460AD002B3BE9 = {
 			isa = PBXGroup;
 			children = (
+				80DD7541298AFE5E0001C6A2 /* RepoWatcherWidgetExtension.entitlements */,
 				8053A293298460AD002B3BE9 /* RepoWatcher */,
 				8053A2AC298460CC002B3BE9 /* RepoWatcherWidget */,
 				8053A2A7298460CC002B3BE9 /* Frameworks */,
@@ -119,6 +124,7 @@
 		8053A293298460AD002B3BE9 /* RepoWatcher */ = {
 			isa = PBXGroup;
 			children = (
+				80DD7540298AFE3E0001C6A2 /* RepoWatcher.entitlements */,
 				8053A294298460AD002B3BE9 /* RepoWatcherApp.swift */,
 				8053A296298460AD002B3BE9 /* ContentView.swift */,
 				8053A2B9298464A7002B3BE9 /* Repository.swift */,
@@ -126,6 +132,7 @@
 				8053A298298460AE002B3BE9 /* Assets.xcassets */,
 				8053A29A298460AE002B3BE9 /* Preview Content */,
 				807E1777298880B5006D4DD9 /* Contributor.swift */,
+				80DD7542298AFE9B0001C6A2 /* UserDefaultsExtension.swift */,
 			);
 			path = RepoWatcher;
 			sourceTree = "<group>";
@@ -265,6 +272,7 @@
 			files = (
 				8053A2BF29846A5D002B3BE9 /* NetworkManager.swift in Sources */,
 				807E176F29885A7C006D4DD9 /* MockData.swift in Sources */,
+				80DD7543298AFE9B0001C6A2 /* UserDefaultsExtension.swift in Sources */,
 				807E1778298880B5006D4DD9 /* Contributor.swift in Sources */,
 				807E176C298853C9006D4DD9 /* RepoMediumView.swift in Sources */,
 				8053A297298460AD002B3BE9 /* ContentView.swift in Sources */,
@@ -420,6 +428,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = RepoWatcher/RepoWatcher.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"RepoWatcher/Preview Content\"";
@@ -450,6 +459,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = RepoWatcher/RepoWatcher.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"RepoWatcher/Preview Content\"";
@@ -479,6 +489,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = RepoWatcherWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = ZQDPVPQ343;
@@ -506,6 +517,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = RepoWatcherWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = ZQDPVPQ343;
