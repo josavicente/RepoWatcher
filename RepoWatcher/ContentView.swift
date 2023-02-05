@@ -2,7 +2,7 @@
 //  ContentView.swift
 //  RepoWatcher
 //
-//  Created by Josafat Vicente Pérez on 27/1/23.
+//  Created by Sean Allen on 8/11/22.
 //
 
 import SwiftUI
@@ -15,7 +15,7 @@ struct ContentView: View {
         NavigationStack {
             VStack {
                 HStack {
-                    TextField("Ex. josavicente/josavicente-dev", text: $newRepo)
+                    TextField("Ex. sallen0400/swift-news", text: $newRepo)
                         .autocapitalization(.none)
                         .autocorrectionDisabled()
                         .textFieldStyle(.roundedBorder)
@@ -24,8 +24,9 @@ struct ContentView: View {
                         if !repos.contains(newRepo) && !newRepo.isEmpty {
                             repos.append(newRepo)
                             UserDefaults.shared.set(repos, forKey: UserDefaults.repoKey)
+                            newRepo = ""
                         } else {
-                            print("Repo already exist or name is empty")
+                            print("repo already exists or name is empty")
                         }
                     } label: {
                         Image(systemName: "plus.circle.fill")
@@ -57,13 +58,14 @@ struct ContentView: View {
                 }
             }
             .navigationTitle("Repo List")
-            .onAppear{
-                guard let retrievedRepos = UserDefaults.shared.value(forKey: UserDefaults.repoKey) as? [String]
-                    else {
-                        let defaultValues = ["josavicente/josavicente-dev"]
+            .onAppear {
+                guard let retrievedRepos = UserDefaults.shared.value(forKey: UserDefaults.repoKey) as? [String] else {
+                    let defaultValues = ["sallen0400/swift-news"]
                     UserDefaults.shared.set(defaultValues, forKey: UserDefaults.repoKey)
+                    repos = defaultValues
                     return
                 }
+
                 repos = retrievedRepos
             }
         }

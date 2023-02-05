@@ -2,7 +2,7 @@
 //  RepoWatcherWidget.swift
 //  RepoWatcherWidget
 //
-//  Created by Josafat Vicente Pérez on 27/1/23.
+//  Created by Sean Allen on 8/11/22.
 //
 
 import WidgetKit
@@ -19,27 +19,27 @@ struct CompactRepoProvider: TimelineProvider {
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        Task{
-            //var entries: [CompactRepoEntry] = []
+        Task {
             let nextUpdate = Date().addingTimeInterval(43200) // 12 hours in seconds
 
-            do{
+            do {
                 // Get Top Repo
-                var repo = try await NetworkManager.shared.getRepo(atURL: RepoURL.repoMidu)
+                var repo = try await NetworkManager.shared.getRepo(atUrl: RepoURL.publish)
                 let avatarImageData = await NetworkManager.shared.downloadImageData(from: repo.owner.avatarUrl)
                 repo.avatarData = avatarImageData ?? Data()
-                
-                // Get the Bottom Repo if necessary
+
+                // Get Bottom Repo if in Large Widget
                 var bottomRepo: Repository?
+
                 if context.family == .systemLarge {
-                    bottomRepo = try await NetworkManager.shared.getRepo(atURL: RepoURL.repoJosa)
+                    bottomRepo = try await NetworkManager.shared.getRepo(atUrl: RepoURL.google)
                     let avatarImageData = await NetworkManager.shared.downloadImageData(from: bottomRepo!.owner.avatarUrl)
                     bottomRepo!.avatarData = avatarImageData ?? Data()
                 }
-                
-                // Create Entry & timeline
-                let entry = CompactRepoEntry(date: .now, repo: repo, bottomRepo: bottomRepo )
-                let timeline = Timeline(entries: [entry], policy: .after(nextUpdate) )
+
+                // Create Entry & Timeline
+                let entry = CompactRepoEntry(date: .now, repo: repo, bottomRepo: bottomRepo)
+                let timeline = Timeline(entries: [entry], policy: .after(nextUpdate))
                 completion(timeline)
             } catch {
                 print("❌ Error - \(error.localizedDescription)")
@@ -58,26 +58,24 @@ struct CompactRepoEntryView : View {
     @Environment(\.widgetFamily) var family
     var entry: CompactRepoEntry
 
-
     var body: some View {
         switch family {
         case .systemMedium:
             RepoMediumView(repo: entry.repo)
         case .systemLarge:
-            VStack (spacing: 36){
+            VStack(spacing: 36) {
                 RepoMediumView(repo: entry.repo)
                 if let bottomRepo = entry.bottomRepo {
                     RepoMediumView(repo: bottomRepo)
                 }
             }
-        default:
+        case .systemSmall, .systemExtraLarge, .accessoryCircular, .accessoryRectangular, .accessoryInline:
+            EmptyView()
+        @unknown default:
             EmptyView()
         }
-        
     }
-    
 }
-
 
 struct CompactRepoWidget: Widget {
     let kind: String = "CompactRepoWidget"
@@ -87,14 +85,14 @@ struct CompactRepoWidget: Widget {
             CompactRepoEntryView(entry: entry)
         }
         .configurationDisplayName("Repo Watcher")
-        .description("Watch your favourite repo")
+        .description("Keep an eye on one or two GitHub repositories.")
         .supportedFamilies([.systemMedium, .systemLarge])
     }
 }
 
-struct CompactRepoWidget_Previews: PreviewProvider {
+struct RepoWatcherWidget_Previews: PreviewProvider {
     static var previews: some View {
         CompactRepoEntryView(entry: CompactRepoEntry(date: Date(), repo: MockData.repoOne, bottomRepo: MockData.repoTwo))
-            .previewContext(WidgetPreviewContext(family: .systemMedium))
+            .previewContext(WidgetPreviewContext(family: .systemLarge))
     }
 }

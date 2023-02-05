@@ -2,7 +2,7 @@
 //  RepoWatcherApp.swift
 //  RepoWatcher
 //
-//  Created by Josafat Vicente Pérez on 27/1/23.
+//  Created by Sean Allen on 8/11/22.
 //
 
 import SwiftUI

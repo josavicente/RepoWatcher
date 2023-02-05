@@ -2,12 +2,12 @@
 //  Contributor.swift
 //  RepoWatcher
 //
-//  Created by Josafat Vicente Pérez on 30/1/23.
+//  Created by Sean Allen on 8/16/22.
 //
 
 import Foundation
 
-struct Contributor : Identifiable {
+struct Contributor: Identifiable {
     let id = UUID()
     let login: String
     let avatarUrl: String
@@ -16,13 +16,16 @@ struct Contributor : Identifiable {
 }
 
 extension Contributor {
-    struct codingData: Decodable {
+    struct CodingData: Decodable {
         let login: String
         let avatarUrl: String
         let contributions: Int
-        
-        var contributor : Contributor {
-            Contributor(login: login, avatarUrl: avatarUrl, contributions: contributions, avatarData: Data())
+
+        var contributor: Contributor {
+            Contributor(login: login,
+                        avatarUrl: avatarUrl,
+                        contributions: contributions,
+                        avatarData: Data())
         }
     }
 }

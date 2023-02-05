@@ -2,7 +2,7 @@
 //  Repository.swift
 //  RepoWatcher
 //
-//  Created by Josafat Vicente Pérez on 27/1/23.
+//  Created by Sean Allen on 8/11/22.
 //
 
 import Foundation
@@ -17,11 +17,18 @@ struct Repository {
     let pushedAt: String
     var avatarData: Data
     var contributors: [Contributor] = []
-
+    
+    var daysSinceLastActivity:  Int {
+        let formatter = ISO8601DateFormatter()
+        let lastActivityDate = formatter.date(from: pushedAt) ?? .now
+        let daysSinceLastActivity = Calendar.current.dateComponents([.day], from: lastActivityDate, to: .now).day ?? 0
+        return daysSinceLastActivity
+    }
+    
 }
 
 extension Repository {
-    struct codingData: Decodable {
+    struct CodingData: Decodable {
         let name: String
         let owner: Owner
         let hasIssues: Bool
@@ -29,14 +36,20 @@ extension Repository {
         let watchers: Int
         let openIssues: Int
         let pushedAt: String
-        
-        var repo: Repository{
-            Repository(name: name, owner: owner, hasIssues: hasIssues, forks: forks, watchers: watchers, openIssues: openIssues, pushedAt: pushedAt, avatarData: Data())
+
+        var repo: Repository {
+            Repository(name: name,
+                       owner: owner,
+                       hasIssues: hasIssues,
+                       forks: forks,
+                       watchers: watchers,
+                       openIssues: openIssues,
+                       pushedAt: pushedAt,
+                       avatarData: Data())
         }
     }
-    
-    
 }
+
 struct Owner: Decodable {
     let avatarUrl: String
 }
